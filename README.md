@@ -5,21 +5,22 @@ and three pork bao...
 There are better versions of this that run on higher end hardware.  Jeff Geerling has a fantastic blog/vlog on this
 exact topic: https://www.jeffgeerling.com/blog/2021/monitor-your-internet-raspberry-pi
 
-This is a different situation.  There are no Raspberry Pi 3/4 to had in 2022.  There is a Raspberry Pi Zero, not even a
-Zero W. There's also a ethernet dongle. And with a full family, and a baby on the way, my time was limited to one lunch
-on a random Saturday.
+This is a different situation.  There are no Raspberry Pi 3/4 to behad in 2022.  There is a Raspberry Pi Zero, not even
+a Zero W. There's also a ethernet dongle. So, with a full family, and a baby on the way, my time was limited to one
+lunch on a random Saturday.
 
 So this is a rough draft of what I came up with so my friend could keep track of his internet performance and show his
-inept rural ISP that they weren't delivering what they promised. I'll refine it over time.
+rural ISP that they weren't delivering what they promised. I'll refine it over time.
 
 ## Caveat
-Did I say this is a rough draft. Mostly just intended to make what I cobbled together stored in place I could refine it.
-If it doesn't work, I'll try to help, but at the same time you *should* expect things to not work
+Did I say this is a rough draft, right? Mostly just intended to make what I cobbled together stored in a place where I
+could refine it. If it doesn't work, I'll try to help, but at the same time you *should* expect things to not work.
 
 ## Installation
 
 OMG!  If you're using Windows, I ask to ask if you read the part about my having a Pi Zero. These (incomplete)
-instructions are so Linux specific that dyed-in-wool-Windows-and-Mac users should turn back.
+instructions are so Linux specific that dyed-in-wool-Windows-and-Mac users should turn back. Then entire process of
+hacking this together was on the Pi Zero over ssh.
 
 This project depends on gnuplot: `sudo apt install gnuplot`
 Yeah, accept the 4 million dependencies, and download the entire internet.  Yes, including the X-Windows stuff even
