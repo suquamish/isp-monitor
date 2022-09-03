@@ -20,11 +20,13 @@ work.
 ## Installation
 
 ### Perface
-OMG!  If you're using Windows or a Mac, I ask to ask if you read the part about my having a Pi Zero?! These (incomplete)
+OMG!  If you're using Windows or MacOS, I ask to ask if you read the part about my having a Pi Zero?! These (incomplete)
 instructions are so Linux specific that dyed-in-wool-Windows-and-Mac users should turn back. Then entire process of
-hacking this together was on the Pi Zero over ssh.
+hacking this together was on the Pi Zero over ssh using vim.
+(the point being: if you don't understand that, this project is not read for you yet)
 
 This project depends on gnuplot: `sudo apt install gnuplot`
+
 Yeah, accept the 4 million dependencies, and download the entire internet.  Yes, including the X-Windows stuff even
 though you are running a headless unit.
 
