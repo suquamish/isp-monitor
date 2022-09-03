@@ -22,7 +22,7 @@ with the Linux command line should look elsewhere. The entire process of hacking
 Zero over ssh using vi-tiny.
 
 The point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet. I've
-probably forgotten bits, or <gasp> authored a bug. You *should* expect things to be broken.
+probably forgotten bits, or \<gasp\> authored a bug. You *should* expect things to be broken.
 
 ### Install dependencies
 This project depends on gnuplot: `sudo apt install gnuplot`
@@ -41,7 +41,7 @@ Copy the isp-monitor-http.service to `/etc/systemd/system` and enable to run at 
 
 The previous commands enable the http server to start at boot, so you can see the output of your ISP monitoring.  To
 make sure everything is working, start the service with `sudo systemctl start isp-monitor-http.service` and point your
-browser to http://<ip address of your pi>:8000/  and you should see a page with a bunch of broken graphics.  This just
+browser to http\://\<ip address of your pi\>:8000/  and you should see a page with a bunch of broken graphics.  This just
 verifies the web server is running.
 
 ### Install the monitoring client
