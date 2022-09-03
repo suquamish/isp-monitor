@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>history</title>
+    <style>div { text-align: center; }</style>
+</head>
+<body>
+<div><img src="1px.png" width="1280px" height="728px" /></div>
+<script>
+     let imagePath = location.search.substring(1).replace('-','/');
+     document.getElementsByTagName('img')[0].src=imagePath;
+   </script>
+</body>
+</html>

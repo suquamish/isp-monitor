@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>connection speed history</title>
+    <style>
+    div { text-align: center; }
+    div.gallery { width: 1280px; margin: 10px auto; overflow: hidden; }
+    div.gallery-item { float: left; border: 1px solid black; width: 148px; height: 85px; margin: 5px; }
+    .gallery-item img { margin: 2px; border 0; }
+    .gallery-item img { filter: grayscale(100%) brightness(90%); }
+    .gallery-item img:hover { filter: grayscale(0%) saturate(200%) brightness(90%); }
+  </style>
+</head>
+<body>
+<div><img src="speedtest.png" width="1280px" height="728px" /></div>
+<div class="gallery"></div>
+</body>
+<script>
+  let gallery=document.getElementsByClassName('gallery')[0];
+  for (let index=1; index<=16; index++) {
+    let galleryItem=document.createElement('div')
+    let galleryItemLink = document.createElement('a');
+    let galleryItemImage = document.createElement('img');
+    galleryItemImagePath = `history/speedtest.${index}.png`;
+
+    galleryItemImage.src=galleryItemImagePath;
+    galleryItemImage.style.width='144px';
+    galleryItemImage.style.height='81px';
+
+    galleryItemLink.href='h.html?' + galleryItemImagePath.replace('/','-');
+    galleryItemLink.target='_blank';
+    galleryItemLink.appendChild(galleryItemImage);
+
+    galleryItem.classList.add('gallery-item');
+    galleryItem.appendChild(galleryItemLink);
+
+    gallery.appendChild(galleryItem);
+  }
+ </script>
+</html>
