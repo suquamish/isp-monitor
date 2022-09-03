@@ -1,0 +1,6 @@
+#!/bin/bash
+
+trap "echo \"caught signal\";exit 0" SIGINT SIGINT SIGQUIT SIGABRT SIGALARM SIGTERM
+
+cd ~pi/
+/usr/bin/python3 -m http.server

@@ -1,0 +1,13 @@
+[Unit]
+Description=speed test data web server
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+User=pi
+Type=simple
+NoNewPrivileges=true
+ExecStart=/home/pi/isp-monitor.server
+
+[Install]
+WantedBy=multi-user.target

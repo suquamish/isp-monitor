@@ -1,0 +1,123 @@
+#!/bin/bash
+
+cd ~pi/
+
+monitorDir="/run/user/1000/monitor"
+outputFile="$monitorDir/$$.$(date +%s)"
+historyFile="$monitorDir/history"
+testCounter="$monitorDir/history.counter"
+
+if [ ! -d $monitorDir ]; then
+  echo "making storage on tmpfs"
+  mkdir /run/user/1000/monitor
+fi
+
+if [ ! -f $historyFile ]; then
+  echo "initializing history file"
+  touch $historyFile
+  echo "date-time,ping,download,upload" >> $historyFile
+  backInTime=120
+  for counter in $(/usr/bin/seq 0 119); do
+    echo "$(/usr/bin/date +%d%b%YT%H\:%M\:%S --date="$(($backInTime - $counter * 5)) minutes ago"),0,0,0" >> /run/user/1000/monitor/history
+  done
+fi
+
+if [ ! -f history/speedtest.1.png -a ! -f history/speedtest.16.png ]; then
+  echo "initializing graphs"
+  for index in $(/usr/bin/seq 1 16); do
+    cp 1px.png history/speedtest.$index.png
+  done
+fi
+
+/usr/bin/speedtest-cli --secure --simple > $outputFile
+exitCode=$?
+
+pingTime=0
+pingUnits="m"
+downloadSpeed=0
+downloadUnits="m"
+uploadSpeed=0
+uploadUnits="m"
+if [ "$exitCode" == 0 ]; then
+  pingTime=$(cat $outputFile | grep 'Ping: ' | cut -d ':' -f 2 | sed -e 's/[^0-9\.]*//g')
+  pingUnits=$(cat $outputFile | grep 'Ping: ' | cut -d ':' -f 2 | sed -e 's/[^a-z]*//g')
+  pingUnits=${pingUnits:0:1}
+  pingUnits=${pingUnits,,}
+  echo "Ping@$pingTime $pingUnits"
+
+  download=$(cat $outputFile | grep 'Download: ' | cut -d ':' -f 2)
+  downloadSpeed=$(echo $download | sed -e 's/[^0-9\.]*//g')
+  downloadUnits=$(echo $download | sed -e 's/[^a-zA-Z]*//g')
+  downloadUnits=${downloadUnits:0:1}
+  downloadUnits=${downloadUnits,,}
+  echo "Download@$downloadSpeed $downloadUnits"
+
+  upload=$(cat $outputFile | grep 'Upload: ' | cut -d ':' -f 2)
+  uploadSpeed=$(echo $upload | sed -e 's/[^0-9\.]*//g')
+  uploadUnits=$(echo $upload | sed -e 's/[^a-zA-Z]*//g')
+  uploadUnits=${uploadUnits:0:1}
+  uploadUnits=${uploadUnits,,}
+  echo "Upload@$uploadSpeed $uploadUnits"
+fi
+
+rm $outputFile
+
+if [ $pingUnits == 's' ]; then
+   pingTime=$(bc <<< "$pingTime * 1000")
+   pingUnits="m"
+fi
+pingTime=$(printf '%.0f' $pingTime)
+
+if [ $downloadUnits == 'b' ]; then
+   downloadSpeed=$(bc <<< "$downloadSpeed / 1000")
+   downloadUnits="k"
+fi
+if [ $downloadUnits == 'k' ]; then
+   downloadSpeed=$(bc <<< "$downloadSpeed / 1000")
+   downloadUnits="m"
+fi
+downloadSpeed=$(printf '%.0f' $downloadSpeed)
+
+if [ $uploadUnits == 'b' ]; then
+   uploadSpeed=$(bc <<< "$uploadSpeed / 1000")
+   uploadUnits="k"
+fi
+if [ $uploadUnits == 'k' ]; then
+   uploadSpeed=$(bc <<< "$uploadSpeed / 1000")
+   uploadUnits="m"
+fi
+uploadSpeed=$(printf '%.0f' $uploadSpeed)
+
+historicalData=$(tail -119 $historyFile)
+rm $historyFile
+touch $historyFile
+echo "date-time,ping,download,upload" >> $historyFile
+for line in $(echo $historicalData | sed -e 's/ /\n/g'); do echo $line >> $historyFile; done
+echo "$(/usr/bin/date +%d%b%YT%H\:%M\:%S),$pingTime,$downloadSpeed,$uploadSpeed" >> $historyFile
+
+/usr/bin/gnuplot ./isp-monitor.gnuplot
+
+timeSeriesCounter=1
+if [ -f $testCounter ]; then
+  timeSeriesCounter=$(cat $testCounter)
+  if [ "$timeSeriesCounter" -eq "$timeSeriesCounter" ] 2>/dev/null; then
+    timeSeriesCounter=$(($timeSeriesCounter + 1))
+  else
+    timeSeriesCounter=1
+  fi
+fi
+
+if [ $timeSeriesCounter -ge 120 ]; then
+  for index in $(/usr/bin/seq 15 -1 1); do
+    if [ -f "./history/speedtest.$index.png" ]; then
+       mv ./history/speedtest.$index.png ./history/speedtest.$(($index + 1)).png
+    fi
+  done
+  cp ./speedtest.png ./history/speedtest.1.png
+  timeSeriesCounter=1
+fi
+
+echo "$timeSeriesCounter" > $testCounter
+
+
+exit 0

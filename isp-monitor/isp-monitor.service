@@ -1,0 +1,7 @@
+[Unit]
+Description=job to gather speedtest-cli data
+
+[Service]
+User=pi
+Type=oneshot
+ExecStart=/home/pi/isp-monitor.client

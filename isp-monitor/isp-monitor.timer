@@ -1,0 +1,9 @@
+[Unit]
+Description=timer to run the speed test data gathering
+
+[Timer]
+OnBootSec=5m
+OnUnitActiveSec=5m
+
+[Install]
+WantedBy=timers.target
