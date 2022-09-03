@@ -20,8 +20,9 @@ work.
 ## Installation
 
 ### Preface
-These (incomplete) instructions are so Linux specific that dyed-in-wool-Windows-and-Mac users should turn back. The
-entire process of hacking this together was on the Pi Zero over ssh using vim.
+These (incomplete) instructions are so Linux specific that dyed-in-wool-Windows-or-Mac users who are not comfortable
+with the Linux command line should look elsewhere. The entire process of hacking this together was done on the Pi
+Zero over ssh using a vi-tiny.
 (the point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet)
 
 ### Install dependencies
@@ -58,4 +59,8 @@ The previous commands will start the business end of monitoring.  Within' five m
 everything initialized. You can validate everything is working by reloading the web page (see above) after the client
 runs the first time. The page should have the start of monitoring history, and the archived graphs section at the bottom
 should have placeholder images.
-
+  
+With time the Pi should start presenting data similar to this:
+  
+![image](https://user-images.githubusercontent.com/6550279/188284561-aad52df3-3767-49ba-9730-c7ed385fa82e.png)
+  
