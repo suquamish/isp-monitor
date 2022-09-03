@@ -22,6 +22,10 @@ if [ ! -f $historyFile ]; then
   done
 fi
 
+if [ ! -d ./history ]; then
+  mkdir history
+fi
+
 if [ ! -f history/speedtest.1.png -a ! -f history/speedtest.16.png ]; then
   echo "initializing graphs"
   for index in $(/usr/bin/seq 1 16); do
