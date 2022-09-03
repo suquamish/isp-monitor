@@ -5,9 +5,9 @@ and three pork bao...
 There are better versions of this that run on higher end hardware.  Jeff Geerling has a fantastic blog/vlog on this
 exact topic: https://www.jeffgeerling.com/blog/2021/monitor-your-internet-raspberry-pi
 
-This is a different situation.  There are no Raspberry Pi 3/4 to behad in 2022.  There is a Raspberry Pi Zero, not even
-a Zero W. There's also a ethernet dongle. So, with a full family, and a baby on the way, my time was limited to one
-lunch on a random Saturday.
+This is a different situation.  There are no Raspberry Pi 3/4 to be had in 2022. What I had was is a sing Raspberry Pi
+Zero (not even a Zero W!). There's also a ethernet dongle. So, with a full family, and a baby on the way, my time was
+limited to one lunch on a random Saturday...
 
 So this is a rough draft of what I came up with so my friend could keep track of his internet performance and show his
 rural ISP that they weren't delivering what they promised. I'll refine it over time.
