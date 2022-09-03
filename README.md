@@ -19,7 +19,7 @@ I'll refine it over time...
 ### Preface
 These (incomplete) instructions are so Linux specific that dyed-in-wool-Windows-or-Mac users who are not comfortable
 with the Linux command line should look elsewhere. The entire process of hacking this together was done on the Pi
-Zero over ssh using a vi-tiny.
+Zero over ssh using vi-tiny.
 
 The point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet. I've
 probably forgotten bits, or <gasp> authored a bug. You *should* expect things to be broken.
