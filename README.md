@@ -34,7 +34,7 @@ This project also depends on the speedtest.net open source speed test client: `s
 
 ### Install the web components
 Fortunately Raspbian comes with python3 OEM, so `isp-monitor.server` should work out of the box. Copy this file to the
-pi user's home directory, along with `index.html`, `h.html`, and `1px.png`.  Also validate that 
+pi user's home directory, along with `index.html`, `h.html`, and `1px.png`.  Confirm all files are owned by the pi user.
 
 Copy the isp-monitor-http.service to `/etc/systemd/system` and enable to run at startup:
 `sudo systemctl enable isp-monitor-http.service`
