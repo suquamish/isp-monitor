@@ -1,21 +1,18 @@
 # isp-monitor
-A friend needs to prove his ISP wasn't delivering what they said they would.  I had a Pi Zero, an ethernet dongle,
+A friend needs to prove his ISP isn't delivering what they said they would. I had a Pi Zero, an ethernet dongle,
 and three pork bao...
 
-There are better versions of this that run on higher end hardware.  Jeff Geerling has a fantastic blog/vlog on this
+There are better versions of this that run on higher end hardware. Jeff Geerling has a fantastic blog/vlog on this
 exact topic: https://www.jeffgeerling.com/blog/2021/monitor-your-internet-raspberry-pi
 
-This is a different situation.  There are no Raspberry Pi 3/4 to be had in 2022. What I had was is a single Raspberry Pi
+This is a different situation. There are no Raspberry Pi 3/4 to be had in 2022. What I had was is a single Raspberry Pi
 Zero (not even a Zero W!), and an ethernet dongle. So, with a full family, and a baby on the way, my time was limited to
 one lunch on a random Saturday...
 
-So this is a rough draft of what I came up with so my friend could keep track of his internet performance and show his
-rural ISP that they weren't delivering what they promised. I'll refine it over time.
+So this is a rough draft of what I came up with so my friend could keep track of internet performance and show the
+rural ISP that they weren't delivering what they promised.
 
-## Caveat
-I did say this is a rough draft, right? Mostly this just intended to make what I cobbled together stored in a place
-where I could refine it. If it doesn't work, I'll try to help, but at the same time you *should* expect things to not
-work.
+I'll refine it over time...
 
 ## Installation
 
@@ -23,7 +20,9 @@ work.
 These (incomplete) instructions are so Linux specific that dyed-in-wool-Windows-or-Mac users who are not comfortable
 with the Linux command line should look elsewhere. The entire process of hacking this together was done on the Pi
 Zero over ssh using a vi-tiny.
-(the point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet)
+
+The point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet. I've
+probably forgotten bits, or <gasp> authored a bug. You *should* expect things to be broken.
 
 ### Install dependencies
 This project depends on gnuplot: `sudo apt install gnuplot`
