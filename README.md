@@ -30,6 +30,8 @@ though you are most likely running a headless unit.
 
 This project also depends on the speedtest.net open source speed test client: `sudo apt install speedtest-cli`
 
+Finally, for floating point math this project depends on bc: `sudo apt install bc`
+
 ### Install the web components
 Fortunately Raspbian comes with python3 OEM, so `isp-monitor.server` should work out of the box. Copy this file to the
 pi user's home directory, along with `index.html`, `h.html`, and `1px.png`. Confirm all files are owned by the pi user,
