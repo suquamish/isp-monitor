@@ -32,10 +32,12 @@ This project also depends on the speedtest.net open source speed test client: `s
 
 Finally, for floating point math this project depends on bc: `sudo apt install bc`
 
+You can, of course, do all this in one-fell-swoop: `sudo apt install gnuplot speedtest-cli bc`
+
 ### Install the web components
 Fortunately Raspbian comes with python3 OEM, so `isp-monitor.server` should work out of the box. Copy this file to the
-pi user's home directory, along with `index.html`, `h.html`, and `1px.png`. Confirm all files are owned by the pi user,
-and the isp-monitor.server is executable by the pi user and group.
+pi user's home directory, along with `index.html`, `h.html`, `favicon.ico`,and `1px.png`. Confirm all files are owned by
+the pi user, and the `isp-monitor.server` file is executable by the pi user and group.
 
 Copy the isp-monitor-http.service to `/etc/systemd/system` and enable to run at startup:
 
@@ -50,7 +52,8 @@ Point your browser to http\://\<ip address of your pi\>:8000/ and you should see
 graphics. This just verifies the web server is running.
 
 ### Install the monitoring client
-Copy the `isp-monitor.client` file to the pi user's home directory, make sure it's owned and executable by the pi user.
+Copy the `isp-monitor.client`, `speedguage.gnuplot`, `isp-monitor.gnuplot` files to the pi user's home directory. Make
+sure the `isp-monitor.client` file is executable by the pi user and group.
 
 Set up the monitor to run every 5 minutes:
 - `cp isp-monitor.timer /etc/systemd/system/`
@@ -64,7 +67,4 @@ everything initialized. You can validate everything is working by reloading the 
 runs the first time. The page should have the start of monitoring history, and the archived graphs section at the bottom
 should have placeholder images.
   
-With time the Pi should start presenting data similar to this:
-  
-![image](https://user-images.githubusercontent.com/6550279/188284561-aad52df3-3767-49ba-9730-c7ed385fa82e.png)
   
