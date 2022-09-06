@@ -55,6 +55,10 @@ graphics. This just verifies the web server is running.
 Copy the `isp-monitor.client`, `speedguage.gnuplot`, `isp-monitor.gnuplot` files to the pi user's home directory. Make
 sure the `isp-monitor.client` file is executable by the pi user and group.
 
+You'll want to edit the `speedguage.gnuplot` file, find the line that reads `topSpeed=100` and change that to either the
+advertised speed your ISP promises in Mbits/s, or the top speed your pi can manage in Mbits/s. 100 Mbit/s is far too
+lofty of a goal for my Pi Zero, but I only need it to muster 60Mbit/s to monitor my friends connection.
+
 Set up the monitor to run every 5 minutes:
 - `cp isp-monitor.timer /etc/systemd/system/`
 - `cp isp-monitor.service /etc/system/system/`
