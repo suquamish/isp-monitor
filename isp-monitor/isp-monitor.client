@@ -92,12 +92,28 @@ if [ $uploadUnits == 'k' ]; then
 fi
 uploadSpeed=$(printf '%.0f' $uploadSpeed)
 
+uploadAverage=0
+downloadAverage=0
 historicalData=$(tail -119 $historyFile)
 rm $historyFile
-touch $historyFile
+touch $historyFile 
 echo "date-time,ping,download,upload" >> $historyFile
-for line in $(echo $historicalData | sed -e 's/ /\n/g'); do echo $line >> $historyFile; done
+for line in $(echo $historicalData | sed -e 's/ /\n/g'); do
+  echo $line >> $historyFile
+  uploadAverage=$(($uploadAverage + $(echo $line | cut -d ',' -f4)))
+  downloadAverage=$(($downloadAverage + $(echo $line | cut -d ',' -f3)))
+done
 echo "$(/usr/bin/date +%d%b%YT%H\:%M\:%S),$pingTime,$downloadSpeed,$uploadSpeed" >> $historyFile
+
+uploadAverage=$(($uploadAverage + $uploadSpeed))
+uploadAverage=$(bc <<< "$uploadAverage / 120")
+echo "averageSpeed = $uploadAverage" > $monitorDir/uploadAverage
+/usr/bin/gnuplot -e 'networkDirection="up"' speedguage.gnuplot
+
+downloadAverage=$(($downloadAverage + $downloadSpeed))
+downloadAverage=$(bc <<< "$downloadAverage / 120")
+echo "averageSpeed = $downloadAverage" > $monitorDir/downloadAverage
+/usr/bin/gnuplot -e 'networkDirection="down"' speedguage.gnuplot
 
 /usr/bin/gnuplot ./isp-monitor.gnuplot
 
@@ -122,6 +138,5 @@ if [ $timeSeriesCounter -ge 120 ]; then
 fi
 
 echo "$timeSeriesCounter" > $testCounter
-
 
 exit 0

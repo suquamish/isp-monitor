@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>connection speed history</title>
+    <title>ISP Monitor</title>
     <style>
     div { text-align: center; }
-    div.gallery { width: 1280px; margin: 10px auto; overflow: hidden; }
-    div.gallery-item { float: left; border: 1px solid black; width: 148px; height: 85px; margin: 5px; }
-    .gallery-item img { margin: 2px; border 0; }
+    .primary { position: relative; width: 1280px; margin: auto; overflow: hidden; }
+    .timeseries { width:1024px; float: left; }
+    .guages { width: 256px; overflow: hidden; }
+    .gauges img { border: 0; }
+    .gallery { width: 1280px; margin: 10px auto; overflow: hidden; }
+    .gallery-item { float: left; border: 1px solid black; width: 148px; height: 85px; margin: 5px; }
+    .gallery-item img { margin: 2px; border: 0; }
     .gallery-item img { filter: grayscale(100%) brightness(90%); }
     .gallery-item img:hover { filter: grayscale(0%) saturate(200%) brightness(90%); }
-  </style>
-</head>
+    </style>
+  </head>
 <body>
-<div><img src="speedtest.png" width="1280px" height="728px" /></div>
+<div class="primary">
+    <div class="timeseries">
+        <a href="h.html?speedtest.png" target="_blank">
+          <img src="speedtest.png" width="1024px" height="576px" />
+        </a>
+    </div>
+    <div class="guages">
+        <img src="upload.png" width="256px" height="166px" />
+        <img src="download.png" width="256px" height="166px" />
+    </div>
+</div>
 <div class="gallery"></div>
 </body>
 <script>
