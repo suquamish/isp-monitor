@@ -67,4 +67,6 @@ everything initialized. You can validate everything is working by reloading the 
 runs the first time. The page should have the start of monitoring history, and the archived graphs section at the bottom
 should have placeholder images.
   
-  
+Eventually you should see something similar to this:
+![image](https://user-images.githubusercontent.com/6550279/188555599-38ebf61e-712a-4789-9e79-52c5b7c2e9df.png)
+
