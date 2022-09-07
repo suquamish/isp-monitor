@@ -19,19 +19,13 @@ unset raxis
 topSpeed=100
  
 set style fill solid noborder
- 
-# define a "needle" pointer as object 1
 set object 1 circle at first 0,0 front size r1 arc [181:182]  fillcolor rgb 'black'
- 
 # define the gauge background
 set object circle at first 0,0  size r1 arc [20:180]  fillcolor rgb 'red'
 set object circle at first 0,0  size r1 arc [0:10]  fillcolor rgb 'green'
 set object circle at first 0,0  size r1 arc [10:20]  fillcolor rgb 'yellow'
 set object circle at first 0,0 front size r2 arc [0:180] fillcolor rgb 'black'
 
-
- 
-# Get the idle time using the top utility
 topSpeed=topSpeed*.97
 if (networkDirection eq "up") {
   load '/run/user/1000/monitor/uploadAverage'
@@ -41,7 +35,7 @@ if (networkDirection eq "up") {
   graphTitle="Avg. Download Speed"
 }
 percentTopSpeed = (averageSpeed / topSpeed) * 100
-# scale the value from 0-100 to 180-0 (Note: arc starts on the right)
+# scale the value from 0-100 to 180-0 (arc starts on the right)
 value = (100 - real(percentTopSpeed)) * 1.8
 # show the value in the title
 set title sprintf("%s\n%.1f Mib/s", graphTitle, averageSpeed)
