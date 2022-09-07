@@ -19,25 +19,22 @@ These (incomplete) instructions are so Linux specific that dyed-in-wool-Windows-
 with the Linux command line should look elsewhere. The entire process of hacking this together was done on the Pi
 Zero over ssh using vi-tiny.
 
-The point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet. I've
-probably forgotten bits, or \<gasp\> authored a bug. You *should* expect things to be broken.
+The point being: if any part of the previous sentence is unclear, this project is not ready for you ... yet.
+
+That said, the installation instructions have been tested on a couple different SBCs that run Armbian versions of
+Ubuntu 22.04.1 LTS and Debian 11; they work as well.
 
 ### Install dependencies
 This project depends on gnuplot for creating the graphs: `sudo apt install gnuplot`
-
-Yeah, accept the 4 million dependencies, and download the entire internet, including the X-Windows stuff even
-though you are most likely running a headless unit.
-
-This project also depends on the speedtest.net open source speed test client: `sudo apt install speedtest-cli`
-
-Finally, for floating point math this project depends on bc: `sudo apt install bc`
+Also the speedtest.net open source speed test client for the actual network measurements: `sudo apt install speedtest-cli`
+Finally, for floating point math this, bc: `sudo apt install bc`
 
 You can, of course, do all this in one-fell-swoop: `sudo apt install gnuplot speedtest-cli bc`
 
 ### Install the web components
-Fortunately Raspbian comes with python3 OEM, so `isp-monitor.server` should work out of the box. Copy this file to the
-pi user's home directory, along with `index.html`, `h.html`, `favicon.ico`,and `1px.png`. Confirm all files are owned by
-the pi user, and the `isp-monitor.server` file is executable by the pi user and group.
+Fortunately Raspbian (and Armbian 22.08) comes with python3 OEM, so `isp-monitor.server` should work
+out of the box. Copy this file to the pi user's home directory, along with `index.html`, `h.html`, `favicon.ico`,and
+`1px.png`. Confirm all files are owned by the pi user, and the `isp-monitor.server` file is executable by the pi user and group.
 
 Copy the isp-monitor-http.service to `/etc/systemd/system` and enable to run at startup:
 
@@ -56,10 +53,11 @@ Copy the `isp-monitor.client`, `speedguage.gnuplot`, `isp-monitor.gnuplot` files
 sure the `isp-monitor.client` file is executable by the pi user and group.
 
 You'll want to edit the `speedguage.gnuplot` file, find the line that reads `topSpeed=100` and change that to either the
-advertised speed your ISP promises in Mbits/s, or the top speed your pi can manage in Mbits/s. 100 Mbit/s is far too
-lofty of a goal for my Pi Zero, but I only need it to muster 60Mbit/s to monitor my friends connection.
+advertised speed your ISP promises in Mbits/s, or the top speed your pi can manage in Mbits/s - whichever is lower.
+100 Mbit/s is far too lofty of a goal for my Pi Zero, but I only need it to muster 60Mbit/s to monitor my friends
+connection.
 
-Set up the monitor to run every 5 minutes:
+Set up the monitor to run every 5 minutes (via systemd):
 - `cp isp-monitor.timer /etc/systemd/system/`
 - `cp isp-monitor.service /etc/system/system/`
 - `sudo daemon-reload`
@@ -70,6 +68,8 @@ The previous commands will start the business end of monitoring.  Within' five m
 everything initialized. You can validate everything is working by reloading the web page (see above) after the client
 runs the first time. The page should have the start of monitoring history, and the archived graphs section at the bottom
 should have placeholder images.
+
+It will take roughly 10 hours to for the speed guages to show accurate average speed.
   
 Eventually you should see something similar to this:
 ![image](https://user-images.githubusercontent.com/6550279/188555599-38ebf61e-712a-4789-9e79-52c5b7c2e9df.png)
